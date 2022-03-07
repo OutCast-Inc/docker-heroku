@@ -1,0 +1,7 @@
+setup:
+  config:
+    env_file: .env
+build:
+  docker:
+    server: Dockerfile.server
+    client: Dockerfile.client

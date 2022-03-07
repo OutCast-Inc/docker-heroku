@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+  redis-server:
+    image: 'redis'
+  express-serv-app:
+    restart: unless-stopped
+    image: 'muqtar/express-server-app:1.0.4'
+    environment:
+      - REDIS_HOST=redis-server
+      - REDIS_PORT=6379
+      - PASS=m@x_secure!!!445
+      - MONGODB_HOST=mongodb+srv://outcastinc:jLpSOsxRfWftGPv6@cluster0.51m09.mongodb.net/myFirstDatabase?retryWrites=true&w=majority
+    ports:
+      - '4000:4000'
+  react-client-app:
+    restart: unless-stopped
+    image: 'muqtar/react-client-app:1.0.4'
+    ports:
+      - '8080:80'
+    depends_on:
+      - express-serv-app
